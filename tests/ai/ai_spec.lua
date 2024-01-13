@@ -1,6 +1,6 @@
-local plugin = require("my_awesome_plugin")
+local plugin = require("ai")
 
-describe("my_awesome_plugin with default", function()
+describe("ai with default", function()
   it("can compute max", function()
     plugin.setup({})
     assert.equals(3, plugin.main(2.5, 2.4, "max"))
@@ -13,7 +13,7 @@ describe("my_awesome_plugin with default", function()
   end)
 end)
 
-describe("my_awesome_plugin with custom options", function()
+describe("ai with custom options", function()
   it("can compute max", function()
     plugin.setup({ round = false })
     assert.equals(2.5, plugin.main(2.5, 2.4, "max"))
