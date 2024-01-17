@@ -1,28 +1,25 @@
----@class ConfigModule
----@field defaults Config: default options
----@field options Config: config table extending defaults
 local M = {}
 
-M.defaults = {
-  round = true,
-}
-
 ---@class Config
----@field round boolean: round the result after calculation
+---@field base_url? string: base url for all requests
+---@field env_var? string: API key for authentication
 M.options = {}
 
---- We will not generate documentation for this function
---- because it has `__` as prefix. This is the one exception
+M.__defaults = {
+  base_url = "https://api.openai.com/v1",
+  env_var = "OPENAI_API_KEY",
+}
+
 --- Setup options by extending defaults with the options proveded by the user
 ---@param options Config: config table
 M.__setup = function(options)
-  M.options = vim.tbl_deep_extend("force", {}, M.defaults, options or {})
+  M.options = vim.tbl_deep_extend("force", {}, M.__defaults, options or {})
 end
 
 ---Format the defaults options table for documentation
 ---@return table
 M.__format_keys = function()
-  local tbl = vim.split(vim.inspect(M.defaults), "\n")
+  local tbl = vim.split(vim.inspect(M.__defaults), "\n")
   table.insert(tbl, 1, "<pre>")
   table.insert(tbl, 2, "Defaults: ~")
   table.insert(tbl, #tbl, "</pre>")
