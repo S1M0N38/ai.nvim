@@ -14,122 +14,35 @@ user in its configuration using the setup function.
 The plugin can be configured using the |ai.setup()| function.
 
 
-PluginNameModule                                            *PluginNameModule*
-
-
-    Fields: ~
-        {setup} (function)  setup the plugin
-        {main}  (function)  calculate the max or min of two numbers and round
-                            the result if specified by options
-
-
 ai.setup({options})                                               *ai.setup()*
     Setup the plugin
 
     Defaults: ~
     {
-      round = true
+      base_url = "https://api.openai.com/v1",
+      env_var = "OPENAI_API_KEY"
     }
 
     Parameters: ~
         {options} (Config)  config table
 
 
-ai.print({a}, {b}, {func}, {result})                              *ai.print()*
-    Print the result of the comparison
+
+================================================================================
+CreateChatCompletionRequest                      *CreateChatCompletionRequest*
 
 
-    Parameters: ~
-        {a}      (number)  first number
-        {b}      (number)  second number
-        {func}   (string)  "max" or "min"
-        {result} (number)  result
-
-
-ai.main({a}, {b}, {func})                                          *ai.main()*
-    Calcululate the max or min of two numbers and round the result if specified
-    by options
-
-
-    Parameters: ~
-        {a}    (number)  first number
-        {b}    (number)  second number
-        {func} (string)  "max" or "min"
-
-    Return: ~
-        number: result
+    Fields: ~
+        {messages} (ChatCompletionRequestMessage[])  A list of messages
+                                                     comprising the
+                                                     conversation so far.
+        {model}    (string)                          ID of the model to use.
 
 
 
 ================================================================================
-MathModule                                                        *MathModule*
-
-
-    Fields: ~
-        {max} (function)  Will return the bigger number
-        {min} (function)  Will return the smaller number
-
-
-M.max({a}, {b})                                                      *M.max()*
-    Will return the bigger number
-
-
-    Parameters: ~
-        {a} (number)  first number
-        {b} (number)  second number
-
-    Return: ~
-        number: bigger number
-
-    See: ~
-        |M.min()|
-
-
-M.min({a}, {b})                                                      *M.min()*
-    Will return the smaller number
-
-
-    Parameters: ~
-        {a} (number)  first number
-        {b} (number)  second number
-
-    Return: ~
-        number: smaller number
-
-    See: ~
-        |M.max()|
-
-
-M.round({num})                                                     *M.round()*
-    Will round a float number to the nearest integer
-
-
-    Parameters: ~
-        {num} (number)  float number
-
-    Return: ~
-        number: rounded num
-
-    See: ~
-        |math.floor()|
-        |math.ceil()|
-
-
-
-================================================================================
-ConfigModule                                                    *ConfigModule*
-
-
-    Fields: ~
-        {defaults} (Config)  default options
-        {options}  (Config)  config table extending defaults
-
-
 Config                                                                *Config*
 
-
-    Fields: ~
-        {round} (boolean)  round the result after calculation
 
 
 
