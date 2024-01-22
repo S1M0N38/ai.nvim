@@ -1,33 +1,29 @@
----@tag ai
-
 ---@brief [[
----This is a template for a plugin. It is meant to be copied and modified.
----The following code is a simple example to show how to use this template and how to take advantage of code
----documentation to generate plugin documentation.
 ---
----This simple example plugin provides a command to calculate the maximum or minimum of two numbers.
----Moreover, the result can be rounded if specified by the user in its configuration using the setup function.
+--- ai.nvim is a minimal Neovim library for creating AI plugins.
+--- It exposes a set of functions to interact with OpenAI alike API.
 ---
---- <pre>
---- `:PluginName {number} {number} {max|min}`
---- </pre>
----
---- The plugin can be configured using the |ai.setup()| function.
+--- 1. CONFIGS .................................................. |ai.nvim-config|
+--- 2. API ......................................................... |ai.nvim-api|
+--- 3. PROXIES ................................................... |ai.nvim-proxy|
 ---
 ---@brief ]]
 
-local chat = require("ai.chat")
-local ai = {
-  chat_completion = chat.chat_completion,
-  chat_completion_stream = chat.chat_completion_stream,
-  -- TODO: add more endpoints
-}
+---@tag ai.nvim
+---@config { ["name"] = "INTRODUCTION", ["module"] = "ai"}
+
+---@class ai
+---@field setup function: setup the plugin
+---@field api table: api entrypoint. See |ai.nvim-api|
+local ai = {}
 
 --- Setup the plugin
----@param options Config: config table
+---@param options Options: config table. See |ai.nvim-config|
 ---@eval { ['description'] = require('ai.config').__format_keys() }
 ai.setup = function(options)
   require("ai.config").__setup(options)
 end
+
+ai.api = require("ai.api")
 
 return ai

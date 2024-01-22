@@ -7,16 +7,11 @@ docs.test = function()
   local input_files = {
     "./lua/ai/init.lua",
     "./lua/ai/config.lua",
-    "./lua/ai/chat.lua",
+    "./lua/ai/api.lua",
   }
 
-  -- Maybe sort them that depends what you want and need
-  table.sort(input_files, function(a, b)
-    return #a < #b
-  end)
-
   -- Output file
-  local output_file = "./doc/ai.txt"
+  local output_file = "./doc/ai.nvim.txt"
   local output_file_handle = io.open(output_file, "w")
   assert(output_file_handle, "Could not open " .. output_file)
 
