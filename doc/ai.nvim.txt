@@ -1,0 +1,52 @@
+================================================================================
+INTRODUCTION                                                           *ai.nvim*
+
+ai.nvim is a minimal Neovim library for creating AI plugins. It exposes a set
+of functions to interact with OpenAI alike API.
+
+1. CONFIGS .................................................. |ai.nvim-config|
+2. API ......................................................... |ai.nvim-api|
+3. PROXIES ................................................... |ai.nvim-proxy|
+
+
+ai                                                                        *ai*
+
+
+    Fields: ~
+        {setup} (function)  setup the plugin
+        {api}   (table)     api entrypoint. See |ai.nvim-api|
+
+
+ai.setup({options})                                               *ai.setup()*
+    Setup the plugin
+
+    Defaults: ~
+    {
+      base_url = "https://api.openai.com/v1",
+      env_var = "OPENAI_API_KEY"
+    }
+
+    Parameters: ~
+        {options} (Options)  config table. See |ai.nvim-config|
+
+
+
+================================================================================
+CONFIGS                                                         *ai.nvim-config*
+
+Before using making API requests, you can set options with the |ai.setup()|
+function.
+
+>
+local ai = require("ai")
+ai.setup({}) -- default options
+-- you API requests here...
+<
+
+The avaialble options are define in the following table.
+
+Options                                                              *Options*
+
+
+
+
