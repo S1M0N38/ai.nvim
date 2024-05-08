@@ -1,28 +1,16 @@
-.PHONY: test lint docs init
+BUSTED_VERSION = 2.1.2-3
 
-TESTS_DIR := tests/
-PLUGIN_DIR := lua/
-
-DOC_GEN_SCRIPT := ./scripts/docs.lua
-MINIMAL_INIT := ./scripts/minimal_init.vim
+install:
+	@echo "Installing tests dependencies..."
+	luarocks --tree . init
+	luarocks --tree ./lua_modules install busted $(BUSTED_VERSION)
+	luarocks --tree ./lua_modules install plenary.nvim
+	luarocks --tree ./.luarocks config --scope project lua_version 5.1
 
 test:
-	nvim --headless --noplugin -u ${MINIMAL_INIT} \
-		-c "PlenaryBustedDirectory ${TESTS_DIR} { minimal_init = '${MINIMAL_INIT}' }"
+	@echo "Running tests..."
+	@nvim -u NONE \
+		-c "lua package.path='lua_modules/share/lua/5.1/?.lua;lua_modules/share/lua/5.1/?/init.lua;'..package.path;package.cpath='lua_modules/lib/lua/5.1/?.so;'..package.cpath;local k,l,_=pcall(require,'luarocks.loader') _=k and l.add_context('busted','$(BUSTED_VERSION)')" \
+		-l "lua_modules/lib/luarocks/rocks-5.1/busted/$(BUSTED_VERSION)/bin/busted" "$$@"
 
-lint:
-	luacheck ${PLUGIN_DIR}
-
-docs:
-	nvim --headless --noplugin -u ${MINIMAL_INIT} \
-		-c "luafile ${DOC_GEN_SCRIPT}" -c 'qa'
-
-init:
-	@nvim --headless --noplugin \
-	  -c "vimgrep /ai/gj **/*.lua **/*.vim Makefile" \
-	  -c "cfdo %s/ai/$(name)/ge | update" \
-	  -c "qa"
-	@find . -depth -type d -name '*ai*' | \
-	  while read dir; do mv "$$dir" "$${dir//ai/$(name)}"; done
-	@find . -type f -name '*ai*' | \
-	  while read file; do mv "$$file" "$${file//ai/$(name)}"; done
+.PHONY: install test
