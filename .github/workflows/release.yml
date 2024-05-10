@@ -4,6 +4,7 @@ on:
   push:
     tags:
       - "v*"
+  workflow_dispatch:
 
 jobs:
   luarocks-release:
@@ -18,14 +19,7 @@ jobs:
           LUAROCKS_API_KEY: ${{ secrets.LUAROCKS_API_KEY }}
         with:
           detailed_description: |
-            A simple way to kickstart your Neovim plugin development like a pro with:
-            - Plugin Structure
-            - Tests
-            - Docs Generation
-            - Linting and Formatting
-            - Deployment
-          dependencies: |
-            plenary.nvim
+            OpenAI compatible API for Neovim plugins development (Experimental)
           copy_directories: |
             {{ neovim.plugin.dirs }}
   github-release:
