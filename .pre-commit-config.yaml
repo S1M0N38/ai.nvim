@@ -1,0 +1,20 @@
+repos:
+  - repo: https://github.com/compilerla/conventional-pre-commit
+    rev: v3.1.0
+    hooks:
+      - id: conventional-pre-commit
+        stages: [commit-msg]
+        args: []
+
+  - repo: https://github.com/JohnnyMorganz/StyLua
+    rev: v0.20.0
+    hooks:
+      - id: stylua-github
+
+  - repo: local
+    hooks:
+      - id: lint
+        name: Lint with Luacheck
+        entry: lua_modules/bin/luacheck --
+        language: system
+        types: [file, lua]
