@@ -10,8 +10,9 @@ description = {
 }
 
 test_dependencies = {
-  "lua >= 5.1, < 5.4",
+  "lua >= 5.1",
   "plenary.nvim",
+  "nui.nvim",
 }
 
 source = {
