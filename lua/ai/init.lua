@@ -79,6 +79,7 @@ function Client:chat_completion_create(request, on_chat_completion, on_chat_comp
         end
       end
     end,
+    on_exit = on_exit,
   }) -- I cannot use vim.system because stdout is buffered
   return job_id
 end
