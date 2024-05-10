@@ -17,7 +17,7 @@ jobs:
         uses: nvim-neorocks/luarocks-tag-release@v5
         env:
           LUAROCKS_API_KEY: ${{ secrets.LUAROCKS_API_KEY }}
-          LUAROCKS_API_KEY: ${{ secrets.GROQ_API_KEY_AI_NVIM }}
+          GROQ_API_KEY_AI_NVIM: ${{ secrets.GROQ_API_KEY_AI_NVIM }}
         with:
           detailed_description: |
             OpenAI compatible API for Neovim plugins development (Experimental)
