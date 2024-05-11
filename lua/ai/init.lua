@@ -1,7 +1,8 @@
 local M = {}
 
----Initialize ai.nvim client with options
----@param opts options: The options to initialize client with
+---Initialize ai.nvim with global options.
+---These options will be used by all clients if not overriden in the :new() method.
+---@param opts Options: The options to initialize client with
 M.setup = function(opts)
   require("ai.config").setup(opts)
 end
@@ -9,7 +10,7 @@ end
 --- Create curl command to send request to the server
 ---@param url string: url for the request
 ---@param api_key string: enviroment variable used for API authentication.
----@param request table: The request to send to the server
+---@param request table: The request to send to the server. This will be encoded as JSON and used as the request body.
 local function curl_command(url, api_key, request)
   local args = {
     "--silent",
@@ -42,17 +43,41 @@ function Client:new(base_url, api_key)
   return instance
 end
 
----@param request table: request for chat completion create
----@param on_chat_completion? fun(table) callback for job exit
----@param on_chat_completion_chunk? fun(table) callback for job stdout
+---Represents a chat completion request to be sent to the model.
+---Reference: https://platform.openai.com/docs/api-reference/chat/create
+---Some API providers does not support all the fields.
+---Consult the provider documentation for a list of supported fields.
+---@alias RequestObject table
+
+---Represents a chat completion response returned by model, based on the provided input.
+---Reference: https://platform.openai.com/docs/api-reference/chat/object
+---@alias ChatCompletionObject table
+
+---Represents a streamed chunk of a chat completion response returned by model, based on the provided input.
+---Reference: https://platform.openai.com/docs/api-reference/chat/streaming
+---@alias ChatCompletionChunkObject table
+
+---@param request RequestObject: request for chat completion create
+---@param on_chat_completion? fun(ChatCompletionObject) callback for job stdout when stream = false
+---@param on_chat_completion_chunk? fun(ChatCompletionChunkObject) callback for job stdout when stream = true
+---@param on_stdout? function: override default callback for job stdout. See `:h on_stdout`.
+---@param on_stderr? function: override default callback for job stderr. See `:h on_stderr`.
+---@param on_exit? function: override default callback for job exit. See `:h on_exit`.
 ---@return number: job id
-function Client:chat_completion_create(request, on_chat_completion, on_chat_completion_chunk, on_exit)
+function Client:chat_completion_create(
+  request,
+  on_chat_completion,
+  on_chat_completion_chunk,
+  on_stdout,
+  on_stderr,
+  on_exit
+)
   local cmd = curl_command(self.base_url .. "/chat/completions", self.api_key, request)
   local job_id = vim.fn.jobstart(cmd, {
     -- This callback parse the reponse data to:
     --  - chat completion object (if stream = false) and call the respective callback
     --  - chat completion chunk object (if stream = true) all call the respective callback.
-    on_stdout = function(_, data, _)
+    on_stdout = on_stdout or function(_, data, _)
       for _, str in pairs(data) do
         if str ~= "" then
           if str:match("data:*") then -- stream == true
@@ -72,15 +97,21 @@ function Client:chat_completion_create(request, on_chat_completion, on_chat_comp
         end
       end
     end,
-    on_stderr = function(_, data, _)
+    on_stderr = on_stderr or function(_, data, _)
       for _, str in pairs(data) do
         if str ~= "" then
           vim.notify("Error: " .. str, vim.log.levels.ERROR)
         end
       end
     end,
-    on_exit = on_exit,
-  }) -- I cannot use vim.system because stdout is buffered
+    on_exit = on_exit or function(_, exit_code, _)
+      if exit_code ~= 0 then
+        vim.notify("Error: " .. exit_code, vim.log.levels.ERROR)
+      else
+        vim.notify("Done.", vim.log.levels.INFO)
+      end
+    end,
+  })
   return job_id
 end
 
