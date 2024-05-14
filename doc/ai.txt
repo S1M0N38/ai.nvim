@@ -1,0 +1,216 @@
+==============================================================================
+INTRODUCTION                                                              *ai*
+
+ai.nvim is a Neovim library (not a Neovim plugin) that makes it easy to query
+LLM providers. It can be thought of as a high-level client for OpenAI
+compatible APIs for Neovim: it crafts the requests and parses the responses.
+
+Table of contents:
+
+1. REQUIRE: Installation and requiring.                           |ai-require|
+2. SETUP: Global configuration setup.                               |ai-setup|
+3. TUTORIAL: First steps with ai.nvim.                           |ai-tutorial|
+4. CLIENT: Client attributes and methods.                          |ai-client|
+
+==============================================================================
+REQUIRE                                                           *ai-require*
+
+As an example throughout this document, we will use S1M0N38/dante.nvim as
+an example plugin to explain how to make use of ai.nvim.
+
+As lazy.nvim dependency ~
+  If the Neovim plugin built on top of ai.nvim is installed via lazy.nvim
+  package manager, then ai.nvim must be added to the dependencies list.
+
+>lua
+    {
+      "S1M0N38/dante.nvim",
+      dependencies = {
+        {
+          "S1M0N38/ai.nvim",
+          opts = { },
+        }
+        -- other dependencies required by dante.nvim ...
+      }
+    }
+<
+
+  If the `opts` key is provided (empty table or table with values),
+  |ai.setup()| will be automatically called with the provided options.
+
+Now the plugin can require the ai.nvim library in its codebase:
+
+>lua
+    local ai = require("ai")
+
+    -- Now you can use the ai library:
+    -- ai.setup()
+    -- local client = ai.Client.new()
+<
+
+==============================================================================
+SETUP                                                               *ai-setup*
+
+The only two values that you have to set up are the `base_url` and `api_key`.
+You can set them up globally (i.e., use as default when creating a new 
+client) using the `ai.setup()` function.
+
+                                                                  *ai.setup()*
+ai.setup({opts}) ~
+
+  The `ai.setup()` function is a convention used by many plugins to set
+  up options provided by the user. It's so common that `lazy.nvim`
+  automatically calls the `ai.setup()` function using the `opts` table.
+
+  The table `opts` that you specify will be merged with the default options
+  which are:
+
+>lua
+  {
+    base_url = "https://api.openai.com/v1",
+    api_key = nil,
+  }
+<
+
+  - `base_url`: The base URL used by all requests. Each LLM provider
+    has its own base URL. So this option lets you specify to which provider
+    your requests will be sent to. An incomplete list of providers can be
+    found on https://github.com/S1M0N38/ai.nvim README.
+
+  - `api_key`: The API key used to authenticate the requests. All the hosted
+    providers require an API key to authenticate the requests. If the
+    provider does not require an API key, you must use a dummy string. If the
+    API key is not provided, the library will throw an error.
+    A suggestion is to use the environment variable to store the API key and
+    then read it with `vim.fn.getenv()` (|getenv()|).
+
+
+==============================================================================
+TUTORIAL                                                         *ai-tutorial*
+                                                          *ai-tutorial-client*
+
+To make requests to a LLM provider, you need to create a client.
+
+>lua
+    local ai = require("ai")
+    local api_key = "your-api-key"
+    local client = ai.Client:new(nil, api_key)
+<
+                                                         *ai-tutorial-request*
+
+Now you need to craft the request. A request is a Lua table that follows
+the format of the OpenAI "Chat Completion Object". Be aware that not all LLM
+providers support all the options.
+
+Reference: https://platform.openai.com/docs/api-reference/chat/create
+
+>lua
+    local request = {
+      model = "gpt-3.5-turbo",
+      stream = false, -- or true, see later
+      messages = {
+        {
+          role = "system",
+          content = "You are a helpful assistant.",
+        },
+        {
+          role = "user",
+          content = "Who was Dante Alighieri?",
+        },
+      },
+    }
+<
+                                                       *ai-tutorial-callbacks*
+
+Now you need to define callbacks to be called on provider response. You can
+define two different callbacks: `on_chat_completion` and
+`on_chat_completion_chunk`.
+
+- `on_chat_completion` is called when the request option `stream=false`.
+  It takes a single argument, the chat completion object.
+  Reference: https://platform.openai.com/docs/api-reference/chat/object
+
+- `on_chat_completion_chunk` is called when the request option `stream=true`.
+  It takes a single argument, the chat completion chunk object.
+  Reference: https://platform.openai.com/docs/api-reference/chat/streaming
+
+
+>lua
+    local function on_chat_completion(chat_completion_obj)
+      print(chat_completion_obj.choices[1].message.content)
+    end
+
+    local function on_chat_completion_chunk(chat_completion_chunk_obj)
+      print(chat_completion_chunk_obj.choices[1].message.content)
+    end
+<
+
+                                          *ai-tutorial-chat-completion-create*
+Finally, you can make the request.
+
+>lua
+    client:chat_completion_create(
+      request,
+      on_chat_completion,
+      on_chat_completion_chunk,
+    )
+<
+
+==============================================================================
+CLIENT                                                             *ai-client*
+
+The client object is the main object used to make requests.
+
+                                                             *ai.Client:new()*
+Client:new(base_url, api_key) ~
+
+  The `ai.Client:new()` function creates a new client object. The `base_url`
+  and `api_key` parameters are optional. If not provided, the library will use
+  the default values set by `ai.setup()`.
+
+  - `base_url`: The base URL used by in all the client requests. See
+    |ai-setup| for more information.
+
+  - `api_key`: The API key used to authenticate all the client requests. See
+    |ai-setup| for more information.
+
+                                          *ai.Client:chat_completion_create()*
+Client:chat_completion_create( ~
+  request, ~
+  on_chat_completion, ~
+  on_chat_completion_chunk, ~
+  on_stdout, ~
+  on_stderr, ~
+  on_exit ~
+) ~
+
+  The `Client:chat_completion_create()` function makes a request to the LLM.
+  It corresponds to `client.chat.completions.create` in OpenAI Python Library.
+
+  - `request`: The request object. It is a required parameter. It must follow
+    the format of OpenAI "Chat Completion Object". See |ai-tutorial-request|
+    for more information.
+
+  - `on_chat_completion`: The callback to be called when the request option
+    `stream=false`. Usually, you can do something interesting with the message
+    content of the return object, like adding the text to a buffer.
+    See |ai-tutorial-callbacks| for more information.
+
+  - `on_chat_completion_chunk`: The callback to be called when the request
+    option `stream=true`. Usually, you can do something interesting with the
+    message content of the return object, like adding the text chunk to a
+    buffer. See |ai-tutorial-callbacks| for more information.
+
+  - `on_stdout`: The default `on_stdout` is responsible for parsing the
+    response from LLM provider and invoking the callbacks. This argument
+    should be left as `nil` unless you want to write your own parsing/calling
+    implementation.
+
+  - `on_stderr`: This function is called on stderr output. The default
+    behavior is to |notify| the error message.
+
+  - `on_exit`: This function is called when the stdout/stderr was already
+    caught and the curl process exits.
+
+==============================================================================
+vim:tw=78:ts=8:et:ft=help:norl:
