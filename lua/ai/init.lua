@@ -80,7 +80,7 @@ function Client:chat_completion_create(
     on_stdout = on_stdout or function(_, data, _)
       for _, str in pairs(data) do
         if str ~= "" then
-          if str:match("data:*") then -- stream == true
+          if str:match("^data:") then -- stream == true
             str = str:sub(7)
             if str ~= "[DONE]" then
               local obj = vim.json.decode(str)
