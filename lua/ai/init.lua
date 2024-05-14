@@ -18,7 +18,7 @@ local function curl_command(url, api_key, request)
     "--header " .. vim.fn.shellescape("Authorization: Bearer " .. api_key),
     "--header " .. vim.fn.shellescape("content-type: application/json"),
     "--url " .. vim.fn.shellescape(url),
-    "--data " .. vim.fn.shellescape(vim.fn.json_encode(request)),
+    "--data " .. vim.fn.shellescape(vim.json.encode(request)),
   }
   return "curl " .. table.concat(args, " ")
 end
@@ -83,13 +83,13 @@ function Client:chat_completion_create(
           if str:match("data:*") then -- stream == true
             str = str:sub(7)
             if str ~= "[DONE]" then
-              local obj = vim.fn.json_decode(str)
+              local obj = vim.json.decode(str)
               if on_chat_completion_chunk then
                 on_chat_completion_chunk(obj)
               end
             end
           else -- stream = false
-            local obj = vim.fn.json_decode(str)
+            local obj = vim.json.decode(str)
             if on_chat_completion then
               on_chat_completion(obj)
             end
