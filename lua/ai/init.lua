@@ -74,9 +74,6 @@ function Client:chat_completion_create(
 )
   local cmd = curl_command(self.base_url .. "/chat/completions", self.api_key, request)
   local job_id = vim.fn.jobstart(cmd, {
-    -- This callback parse the reponse data to:
-    --  - chat completion object (if stream = false) and call the respective callback
-    --  - chat completion chunk object (if stream = true) all call the respective callback.
     on_stdout = on_stdout or function(_, data, _)
       for _, str in pairs(data) do
         if str ~= "" then
