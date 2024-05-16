@@ -12,13 +12,17 @@ end
 ---@param api_key string: enviroment variable used for API authentication.
 ---@param request table: The request to send to the server. This will be encoded as JSON and used as the request body.
 local function curl_command(url, api_key, request)
+  local json_request = vim.json.encode(request)
+  if json_request then
+    error("Error while parsing the request")
+  end
   local args = {
     "--silent",
     "--no-buffer",
     "--header " .. vim.fn.shellescape("Authorization: Bearer " .. api_key),
     "--header " .. vim.fn.shellescape("content-type: application/json"),
     "--url " .. vim.fn.shellescape(url),
-    "--data " .. vim.fn.shellescape(vim.json.encode(request)),
+    "--data " .. vim.fn.shellescape(json_request),
   }
   return "curl " .. table.concat(args, " ")
 end
