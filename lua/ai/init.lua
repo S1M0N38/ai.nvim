@@ -13,7 +13,7 @@ end
 ---@param request table: The request to send to the server. This will be encoded as JSON and used as the request body.
 local function curl_command(url, api_key, request)
   local json_request = vim.json.encode(request)
-  if json_request then
+  if type(json_request) ~= "string" then
     error("Error while parsing the request")
   end
   local args = {
