@@ -141,7 +141,7 @@ define two different callbacks: `on_chat_completion` and
     end
 
     local function on_chat_completion_chunk(chat_completion_chunk_obj)
-      print(chat_completion_chunk_obj.choices[1].message.content)
+      print(chat_completion_chunk_obj.choices[1].delta.content)
     end
 <
 
