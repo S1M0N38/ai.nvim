@@ -1,3 +1,4 @@
+---@diagnostic disable: undefined-global
 local ai = require("ai")
 
 local opts = {

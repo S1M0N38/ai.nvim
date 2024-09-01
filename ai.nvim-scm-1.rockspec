@@ -1,3 +1,4 @@
+---@diagnostic disable: lowercase-global
 rockspec_format = "3.0"
 package = "ai.nvim"
 version = "scm-1"
