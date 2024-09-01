@@ -52,7 +52,7 @@ Now the plugin can require the ai.nvim library in its codebase:
 SETUP                                                               *ai-setup*
 
 The only two values that you have to set up are the `base_url` and `api_key`.
-You can set them up globally (i.e., use as default when creating a new 
+You can set them up globally (i.e., use as default when creating a new
 client) using the `ai.setup()` function.
 
                                                                   *ai.setup()*
@@ -207,7 +207,7 @@ Client:chat_completion_create( ~
     implementation.
 
   - `on_stderr`: This function is called on stderr output. The default
-    behavior is to |notify| the error message.
+    behavior is to |notify| with a error message.
 
   - `on_exit`: This function is called when the stdout/stderr was already
     caught and the curl process exits.
