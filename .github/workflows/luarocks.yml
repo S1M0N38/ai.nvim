@@ -1,25 +1,27 @@
-name: Release
-
+---
+name: "Release"
 on:
   push:
     tags:
-      - "v*"
+      - 'v*.*.*'
   workflow_dispatch:
 
 jobs:
   luarocks-release:
-    name: LuaRocks release
     runs-on: ubuntu-latest
+    name: Luarocks Release
     steps:
       - name: Checkout
         uses: actions/checkout@v3
-      - name: Release
-        uses: nvim-neorocks/luarocks-tag-release@v5
+        if: env.LUAROCKS_API_KEY != null
+      - name: Luarocks Upload
+        uses: nvim-neorocks/luarocks-tag-release@v7
+        if: env.LUAROCKS_API_KEY != null
         env:
           LUAROCKS_API_KEY: ${{ secrets.LUAROCKS_API_KEY }}
           GROQ_API_KEY_AI_NVIM: ${{ secrets.GROQ_API_KEY_AI_NVIM }}
         with:
           detailed_description: |
-            OpenAI compatible API for Neovim plugins development (Experimental)
+            OpenAI compatible API for Neovim plugins development
           copy_directories: |
             {{ neovim.plugin.dirs }}
