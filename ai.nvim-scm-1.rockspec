@@ -1,7 +1,8 @@
 ---@diagnostic disable: lowercase-global
+local _MODREV, _SPECREV = "scm", "-1"
 rockspec_format = "3.0"
 package = "ai.nvim"
-version = "scm-1"
+version = _MODREV .. _SPECREV
 
 description = {
   summary = "OpenAI compatible API for Neovim (Experimental)",
@@ -11,9 +12,7 @@ description = {
 }
 
 test_dependencies = {
-  "lua >= 5.1",
-  "plenary.nvim",
-  "nui.nvim",
+  "nlua",
 }
 
 source = {
