@@ -2,8 +2,12 @@ return {
   _all = {
     coverage = false,
     lpath = "lua/?.lua;lua/?/init.lua",
+    lua = "nlua",
   },
   default = {
+    verbose = true,
+  },
+  tests = {
     verbose = true,
   },
 }
