@@ -44,23 +44,24 @@ Plugins built with `ai.nvim`:
 ## ✨ LLM Providers
 
 There are many providers that offer LLM models exposing OpenAI compatible API.
-Many more providers can be queried by using [LiteLLM proxy](https://docs.litellm.ai/).
 The following is an incomplete list of providers that I have experimented with:
 
-| Provider                                                               | Price | Models                | Type   |
-| :--------------------------------------------------------------------- | :---- | :-------------------- | :----- |
-| [OpenAI](https://platform.openai.com/docs/overview)                    | Paid  | GPT Family            | Hosted |
-| [Mistral](https://docs.mistral.ai/api/)                                | Paid  | Mistral Family        | Hosted |
-| [Cohere](https://docs.cohere.com/docs/chat-api) (with LiteLLM)         | Free  | Command Family        | Hosted |
-| [Groq](https://console.groq.com/docs/quickstart)                       | Free  | LLama, Mixtral, Gemma | Hosted |
-| [Ollama](https://github.com/ollama/ollama/blob/main/docs/openai.md)    | Free  | Open-source Models    | Local  |
-| [llama-cpp](https://llama-cpp-python.readthedocs.io/en/stable/server/) | Free  | Open-source Models    | Local  |
+| Provider                                             | Models                                                            | Base URL                         |
+| :--------------------------------------------------- | :---------------------------------------------------------------- | :------------------------------- |
+| [OpenAI](https://platform.openai.com/docs/overview)  | `gpt-4o`, `gpt-4o-mini`                                           | `https://api.openai.com/v1`      |
+| [Mistral](https://docs.mistral.ai/)                  | `mistral-large-latest`, `open-mistral-nemo`                       | `https://api.mistral.ai/v1`      |
+| [Groq](https://console.groq.com/docs/quickstart)[^1] | `gemma2-9b-it`, `llama-3.1-70b-versatile`, `llama-3.1-8b-instant` | `https://api.groq.com/openai/v1` |
 
-At the moment of writing, I'm really enjoying using Groq due to its free tier and its next level speed.
-For highly sensitive data, I use local models through Ollama.
+- If you want to use other providers that do not expose OpenAI compatible API (e.g. Anthropic, Cohere, ...), you can try [liteLLM](https://docs.litellm.ai/docs/) proxy service.
+- If you want to use local models, you can use [Ollama](https://ollama.com/), [llama-cpp](https://github.com/ggerganov/llama.cpp), [vLLM](https://docs.vllm.ai/en/latest/) or others.
+
+**There is no future plan to support other API standards besides OpenAI compatible API.**
 
 ## 🙏 Acknowledgments
 
 - My Awesome Plugin [template](https://github.com/S1M0N38/my-awesome-plugin.nvim).
 - [mrcjkb's blog posts](https://mrcjkb.dev/) about Neovim, Luarocks and Busted.
 - [mrcjkb](https://github.com/mrcjkb) and [vhyrro](https://github.com/vhyrro) repos' for GitHub Actions workflows.
+
+[^1]: Groq is so fast at running smaller models (e.g. `llama-3.1-8b-instant`) that a new completion chunk is returned before the previous one is processed.
+    This will result in messed up results in the completion window. See [issue #9](https://github.com/S1M0N38/ai.nvim/issues/9)
