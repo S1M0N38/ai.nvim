@@ -1,4 +1,4 @@
-<h1 align="center">ai.nvim</h1>
+<h1 align="center">✧&nbsp;&nbsp;ai.nvim&nbsp;&nbsp;✧</h1>
 
 <p align="center">
   <a href="https://github.com/S1M0N38/ai.nvim/releases">
