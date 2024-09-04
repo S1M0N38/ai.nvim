@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.1](https://github.com/S1M0N38/ai.nvim/compare/v1.0.0...v1.0.1) (2024-09-04)
+
+
+### Bug Fixes
+
+* [#10](https://github.com/S1M0N38/ai.nvim/issues/10) by rewriting on_stdout function ([628fbbc](https://github.com/S1M0N38/ai.nvim/commit/628fbbcf956ad0b88d06fe354ea1e0bf4c42e76c))
+
 ## [1.0.0](https://github.com/S1M0N38/ai.nvim/compare/v0.1.1...v1.0.0) (2024-09-02)
 
 
