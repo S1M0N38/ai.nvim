@@ -76,24 +76,33 @@ function Client:chat_completion_create(
   on_stderr,
   on_exit
 )
+  if request.stream then
+    if not on_chat_completion_chunk then
+      error("on_chat_completion_chunk is required for stream=true")
+    end
+  else
+    if not on_chat_completion then
+      error("on_chat_completion is required for stream=false")
+    end
+  end
+
+  local obj
   local cmd = curl_command(self.base_url .. "/chat/completions", self.api_key, request)
   local job_id = vim.fn.jobstart(cmd, {
     on_stdout = on_stdout or function(_, data, _)
-      for _, str in pairs(data) do
-        if str ~= "" then
-          if str:match("^data:") then -- stream == true
-            str = str:sub(7)
-            if str ~= "[DONE]" then
-              local obj = vim.json.decode(str)
-              if on_chat_completion_chunk then
-                on_chat_completion_chunk(obj)
-              end
+      for _, str in ipairs(data) do
+        if str and str ~= "" then
+          if request.stream then
+            str = str:match("^data: (.+)$")
+            if str and str ~= "[DONE]" then
+              obj = vim.json.decode(str)
+              ---@diagnostic disable-next-line: need-check-nil
+              on_chat_completion_chunk(obj)
             end
-          else -- stream = false
-            local obj = vim.json.decode(str)
-            if on_chat_completion then
-              on_chat_completion(obj)
-            end
+          else
+            obj = vim.json.decode(str)
+            ---@diagnostic disable-next-line: need-check-nil
+            on_chat_completion(obj)
           end
         end
       end
