@@ -46,12 +46,12 @@ Plugins built with `ai.nvim`:
 There are many providers that offer LLM models exposing OpenAI compatible API.
 The following is an incomplete list of providers that I have experimented with:
 
-| Provider                                             | Models                                                            | Base URL                         |
-| :--------------------------------------------------- | :---------------------------------------------------------------- | :------------------------------- |
-| [OpenAI](https://platform.openai.com/docs/overview)  | `gpt-4o`, `gpt-4o-mini`                                           | `https://api.openai.com/v1`      |
-| [Mistral](https://docs.mistral.ai/)                  | `mistral-large-latest`, `open-mistral-nemo`                       | `https://api.mistral.ai/v1`      |
-| [Groq](https://console.groq.com/docs/quickstart) | `gemma2-9b-it`, `llama-3.1-70b-versatile`, `llama-3.1-8b-instant` | `https://api.groq.com/openai/v1` |
-| [Copilot Chat](https://docs.github.com/en/copilot/using-github-copilot/asking-github-copilot-questions-in-your-ide)[^1] | `gpt-4o-2024-05-13` | `https://api.githubcopilot.com` |
+| Provider                                                                                                                | Models                                                            | Base URL                         |
+| :---------------------------------------------------------------------------------------------------------------------- | :---------------------------------------------------------------- | :------------------------------- |
+| [OpenAI](https://platform.openai.com/docs/overview)                                                                     | `gpt-4o`, `gpt-4o-mini`                                           | `https://api.openai.com/v1`      |
+| [Mistral](https://docs.mistral.ai/)                                                                                     | `mistral-large-latest`, `open-mistral-nemo`                       | `https://api.mistral.ai/v1`      |
+| [Groq](https://console.groq.com/docs/quickstart)                                                                        | `gemma2-9b-it`, `llama-3.1-70b-versatile`, `llama-3.1-8b-instant` | `https://api.groq.com/openai/v1` |
+| [Copilot Chat](https://docs.github.com/en/copilot/using-github-copilot/asking-github-copilot-questions-in-your-ide)[^1] | `gpt-4o-2024-05-13`                                               | `https://api.githubcopilot.com`  |
 
 - If you want to use other providers that do not expose OpenAI compatible API (e.g. Anthropic, Cohere, ...), you can try [liteLLM](https://docs.litellm.ai/docs/) proxy service.
 - If you want to use local models, you can use [Ollama](https://ollama.com/), [llama-cpp](https://github.com/ggerganov/llama.cpp), [vLLM](https://docs.vllm.ai/en/latest/) or others.
@@ -64,4 +64,4 @@ The following is an incomplete list of providers that I have experimented with:
 - [mrcjkb's blog posts](https://mrcjkb.dev/) about Neovim, Luarocks and Busted.
 - [mrcjkb](https://github.com/mrcjkb) and [vhyrro](https://github.com/vhyrro) repos' for GitHub Actions workflows.
 
-[^1]: Copilot Chat is not a proper LLM provider, but a service offered with Copilot subscription. If you use [copilot.vim](https://github.com/github/copilot.vim) or [copilot.lua](https://github.com/zbirenbaum/copilot.lua) you should have the token store in one of these location: `~/AppData/Local/github-copilot`, `$XDG_CONFIG_HOME/github-copilot` or `~/.config/github-copilot` in a file named `hosts.json` or `apps.json`. You can use that token (e.g. `ghu_this-is-how-token-looks-like-xxxxxxx`) as `api_key` in ai.nvim configuration.
+[^1]: Copilot Chat is not a proper LLM provider, but a service offered with a Copilot subscription. If you use [copilot.vim](https://github.com/github/copilot.vim) or [copilot.lua](https://github.com/zbirenbaum/copilot.lua), you should have the token stored in one of these locations: `~/AppData/Local/github-copilot`, `$XDG_CONFIG_HOME/github-copilot`, or `~/.config/github-copilot` in a file named `hosts.json` or `apps.json`. You can use that token (e.g., `ghu_this-is-how-token-looks-like-xxxxxxx`) as `api_key` in ai.nvim configuration.
