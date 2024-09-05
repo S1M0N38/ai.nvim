@@ -10,7 +10,7 @@ local opts_table = {
   copilot = {
     -- GitHub Copilot
     base_url = "https://api.githubcopilot.com",
-    api_key = vim.fn.getenv("GITHUB_COPILOT_API_KEY"),
+    api_key = vim.fn.getenv("COPILOT_API_KEY_AI_NVIM"),
   },
 }
 
