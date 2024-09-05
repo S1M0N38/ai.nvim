@@ -50,7 +50,7 @@ The following is an incomplete list of providers that I have experimented with:
 | :--------------------------------------------------- | :---------------------------------------------------------------- | :------------------------------- |
 | [OpenAI](https://platform.openai.com/docs/overview)  | `gpt-4o`, `gpt-4o-mini`                                           | `https://api.openai.com/v1`      |
 | [Mistral](https://docs.mistral.ai/)                  | `mistral-large-latest`, `open-mistral-nemo`                       | `https://api.mistral.ai/v1`      |
-| [Groq](https://console.groq.com/docs/quickstart)[^1] | `gemma2-9b-it`, `llama-3.1-70b-versatile`, `llama-3.1-8b-instant` | `https://api.groq.com/openai/v1` |
+| [Groq](https://console.groq.com/docs/quickstart)     | `gemma2-9b-it`, `llama-3.1-70b-versatile`, `llama-3.1-8b-instant` | `https://api.groq.com/openai/v1` |
 
 - If you want to use other providers that do not expose OpenAI compatible API (e.g. Anthropic, Cohere, ...), you can try [liteLLM](https://docs.litellm.ai/docs/) proxy service.
 - If you want to use local models, you can use [Ollama](https://ollama.com/), [llama-cpp](https://github.com/ggerganov/llama.cpp), [vLLM](https://docs.vllm.ai/en/latest/) or others.
@@ -62,6 +62,3 @@ The following is an incomplete list of providers that I have experimented with:
 - My Awesome Plugin [template](https://github.com/S1M0N38/my-awesome-plugin.nvim).
 - [mrcjkb's blog posts](https://mrcjkb.dev/) about Neovim, Luarocks and Busted.
 - [mrcjkb](https://github.com/mrcjkb) and [vhyrro](https://github.com/vhyrro) repos' for GitHub Actions workflows.
-
-[^1]: Groq is so fast at running smaller models (e.g. `llama-3.1-8b-instant`) that a new completion chunk is returned before the previous one is processed.
-    This will result in messed up results in the completion window. See [issue #9](https://github.com/S1M0N38/ai.nvim/issues/9)
