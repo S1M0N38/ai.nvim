@@ -1,3 +1,4 @@
+---@diagnostic disable: need-check-nil
 local M = {}
 
 ---Initialize ai.nvim with global options.
@@ -120,14 +121,12 @@ function Client:chat_completion_create(
                   if obj["choices"][1]["delta"]["content"] == vim.NIL then
                     obj["choices"][1]["delta"]["content"] = ""
                   end
-                  ---@diagnostic disable-next-line: need-check-nil
                   on_chat_completion_chunk(obj)
                 end
               end
             end
           else
             obj = vim.json.decode(str)
-            ---@diagnostic disable-next-line: need-check-nil
             on_chat_completion(obj)
           end
         end
