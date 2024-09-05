@@ -20,10 +20,18 @@ local function curl_command(url, api_key, request)
     "--silent",
     "--no-buffer",
     "--header " .. vim.fn.shellescape("Authorization: Bearer " .. api_key),
-    "--header " .. vim.fn.shellescape("content-type: application/json"),
+    "--header " .. vim.fn.shellescape("Content-Type: application/json"),
     "--url " .. vim.fn.shellescape(url),
     "--data " .. vim.fn.shellescape(json_request),
   }
+
+  -- hack for GitHub Copilot compatibility
+  if url:find("githubcopilot") then
+    local version = "Neovim/" .. vim.version().major .. "." .. vim.version().minor .. "." .. vim.version().patch
+    table.insert(args, "--header " .. vim.fn.shellescape("Copilot-Integration-Id: vscode-chat"))
+    table.insert(args, "--header " .. vim.fn.shellescape("editor-version: " .. version))
+  end
+
   return "curl " .. table.concat(args, " ")
 end
 
@@ -87,17 +95,35 @@ function Client:chat_completion_create(
   end
 
   local obj
+  local status
+  local leftover = nil
   local cmd = curl_command(self.base_url .. "/chat/completions", self.api_key, request)
   local job_id = vim.fn.jobstart(cmd, {
     on_stdout = on_stdout or function(_, data, _)
       for _, str in ipairs(data) do
         if str and str ~= "" then
           if request.stream then
+            if leftover then
+              str = leftover .. str
+              leftover = nil
+            end
             str = str:match("^data: (.+)$")
             if str and str ~= "[DONE]" then
-              obj = vim.json.decode(str)
-              ---@diagnostic disable-next-line: need-check-nil
-              on_chat_completion_chunk(obj)
+              status, obj = pcall(function()
+                return vim.json.decode(str)
+              end)
+              if not status then
+                leftover = "data: " .. str
+              else
+                --patches for GitHub Copilot wierd behavior
+                if #obj.choices > 0 then
+                  if obj["choices"][1]["delta"]["content"] == vim.NIL then
+                    obj["choices"][1]["delta"]["content"] = ""
+                  end
+                  ---@diagnostic disable-next-line: need-check-nil
+                  on_chat_completion_chunk(obj)
+                end
+              end
             end
           else
             obj = vim.json.decode(str)
