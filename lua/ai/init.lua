@@ -143,7 +143,7 @@ function Client:chat_completion_create(
     on_exit = on_exit or function(_, exit_code, _)
       if exit_code ~= 0 then
         vim.notify("Error: " .. exit_code, vim.log.levels.ERROR)
-      else
+        -- else
         -- vim.notify("Done.", vim.log.levels.INFO)
       end
     end,
