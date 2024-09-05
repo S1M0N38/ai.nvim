@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.1.0](https://github.com/S1M0N38/ai.nvim/compare/v1.0.1...v1.1.0) (2024-09-05)
+
+
+### Features
+
+* GitHub Copilot compatibility ([be281d9](https://github.com/S1M0N38/ai.nvim/commit/be281d9f968fc5628e709f5c449c635a3d1edf07))
+
+
+### Bug Fixes
+
+* update environment variable for Copilot API key ([dd08c50](https://github.com/S1M0N38/ai.nvim/commit/dd08c50f0f8442445811fe247ad305aa510e2ae3))
+
 ## [1.0.1](https://github.com/S1M0N38/ai.nvim/compare/v1.0.0...v1.0.1) (2024-09-04)
 
 
