@@ -1,4 +1,3 @@
----@diagnostic disable: need-check-nil
 local M = {}
 
 ---Initialize ai.nvim with global options.
@@ -56,20 +55,6 @@ function Client:new(base_url, api_key)
   return instance
 end
 
----Represents a chat completion request to be sent to the model.
----Reference: https://platform.openai.com/docs/api-reference/chat/create
----Some API providers does not support all the fields.
----Consult the provider documentation for a list of supported fields.
----@alias RequestObject table
-
----Represents a chat completion response returned by model, based on the provided input.
----Reference: https://platform.openai.com/docs/api-reference/chat/object
----@alias ChatCompletionObject table
-
----Represents a streamed chunk of a chat completion response returned by model, based on the provided input.
----Reference: https://platform.openai.com/docs/api-reference/chat/streaming
----@alias ChatCompletionChunkObject table
-
 ---@param request RequestObject: request for chat completion create
 ---@param on_chat_completion? fun(ChatCompletionObject) callback for job stdout when stream = false
 ---@param on_chat_completion_chunk? fun(ChatCompletionChunkObject) callback for job stdout when stream = true
@@ -78,12 +63,12 @@ end
 ---@param on_exit? function: override default callback for job exit. See `:h on_exit`.
 ---@return number: job id
 function Client:chat_completion_create(
-  request,
-  on_chat_completion,
-  on_chat_completion_chunk,
-  on_stdout,
-  on_stderr,
-  on_exit
+    request,
+    on_chat_completion,
+    on_chat_completion_chunk,
+    on_stdout,
+    on_stderr,
+    on_exit
 )
   if request.stream then
     if not on_chat_completion_chunk then
@@ -117,16 +102,19 @@ function Client:chat_completion_create(
                 leftover = "data: " .. str
               else
                 --patches for GitHub Copilot wierd behavior
+                assert(obj, "Error while parsing the response: obj is nil")
                 if #obj.choices > 0 then
                   if obj["choices"][1]["delta"]["content"] == vim.NIL then
                     obj["choices"][1]["delta"]["content"] = ""
                   end
+                  ---@diagnostic disable-next-line: need-check-nil
                   on_chat_completion_chunk(obj)
                 end
               end
             end
           else
             obj = vim.json.decode(str)
+            ---@diagnostic disable-next-line: need-check-nil
             on_chat_completion(obj)
           end
         end
