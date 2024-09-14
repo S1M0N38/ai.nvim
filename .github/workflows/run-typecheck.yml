@@ -1,4 +1,5 @@
-name: Type Check Code Base
+name: Run typecheck
+
 on:
   pull_request: ~
   push:

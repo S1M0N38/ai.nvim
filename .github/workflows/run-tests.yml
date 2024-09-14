@@ -1,5 +1,5 @@
----
 name: Run tests
+
 on:
   pull_request: ~
   push:
@@ -21,6 +21,5 @@ jobs:
         uses: nvim-neorocks/nvim-busted-action@v1
         env:
           GROQ_API_KEY_AI_NVIM: ${{ secrets.GROQ_API_KEY_AI_NVIM }}
-          COPILOT_API_KEY_AI_NVIM: ${{ secrets.COPILOT_API_KEY_AI_NVIM }}
         with:
           nvim_version: ${{ matrix.neovim_version }}
