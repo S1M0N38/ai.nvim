@@ -25,7 +25,6 @@
 ---@field max_tokens? integer Maximum number of tokens to generate
 ---@field stream? boolean Whether to stream responses back (default is false)
 
-
 ---Represents a chat completion response returned by model, based on the provided input.
 ---Reference: https://platform.openai.com/docs/api-reference/chat/object
 ---@class ChatCompletionObject
