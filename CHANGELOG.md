@@ -1,5 +1,18 @@
 # Changelog
 
+## [1.2.0](https://github.com/S1M0N38/ai.nvim/compare/v1.1.0...v1.2.0) (2024-09-14)
+
+
+### Features
+
+* **types:** add type definitions for chat completion API ([b3ddcd8](https://github.com/S1M0N38/ai.nvim/commit/b3ddcd8f2805ad4c7b481ebf76bf377bfc8e8734))
+
+
+### Bug Fixes
+
+* correct grammar and punctuation in README.md ([02c0f14](https://github.com/S1M0N38/ai.nvim/commit/02c0f149ea9f22b7caae8e48583e881c06c1b7b3))
+* **spec:** remove GitHub Copilot configuration ([4e5edc7](https://github.com/S1M0N38/ai.nvim/commit/4e5edc74325c0a8081f61ec5fdb5a4854a565a03))
+
 ## [1.1.0](https://github.com/S1M0N38/ai.nvim/compare/v1.0.1...v1.1.0) (2024-09-05)
 
 
