@@ -63,12 +63,12 @@ end
 ---@param on_exit? function: override default callback for job exit. See `:h on_exit`.
 ---@return number: job id
 function Client:chat_completion_create(
-    request,
-    on_chat_completion,
-    on_chat_completion_chunk,
-    on_stdout,
-    on_stderr,
-    on_exit
+  request,
+  on_chat_completion,
+  on_chat_completion_chunk,
+  on_stdout,
+  on_stderr,
+  on_exit
 )
   if request.stream then
     if not on_chat_completion_chunk then
