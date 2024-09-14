@@ -20,8 +20,8 @@ local requests_table = {
     { model = "llama3-8b-8192", messages = { { role = "user", content = "what's 2+2 and 2+3?" } }, stream = true },
   },
   copilot = {
-    { model = "gpt-4o-2024-05-13", messages = { { role = "user", content = "what's 2+2 and 2+3?" } } },
-    { model = "gpt-4o-2024-05-13", messages = { { role = "user", content = "what's 2+2 and 2+3?" } }, stream = true },
+    { model = "gpt-4o-mini", messages = { { role = "user", content = "what's 2+2 and 2+3?" } } },
+    { model = "gpt-4o-mini", messages = { { role = "user", content = "what's 2+2 and 2+3?" } }, stream = true },
   },
 }
 
