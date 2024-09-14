@@ -7,11 +7,7 @@ local opts_table = {
     base_url = "https://api.groq.com/openai/v1",
     api_key = vim.fn.getenv("GROQ_API_KEY_AI_NVIM"),
   },
-  copilot = {
-    -- GitHub Copilot
-    base_url = "https://api.githubcopilot.com",
-    api_key = vim.fn.getenv("COPILOT_API_KEY_AI_NVIM"),
-  },
+  -- add other providers here ...
 }
 
 local requests_table = {
@@ -19,10 +15,7 @@ local requests_table = {
     { model = "llama3-8b-8192", messages = { { role = "user", content = "what's 2+2 and 2+3?" } } },
     { model = "llama3-8b-8192", messages = { { role = "user", content = "what's 2+2 and 2+3?" } }, stream = true },
   },
-  copilot = {
-    { model = "gpt-4o-mini", messages = { { role = "user", content = "what's 2+2 and 2+3?" } } },
-    { model = "gpt-4o-mini", messages = { { role = "user", content = "what's 2+2 and 2+3?" } }, stream = true },
-  },
+  -- add other providers here ...
 }
 
 describe("Create ai.Client", function()
