@@ -1,8 +1,8 @@
 <h1 align="center">✧&nbsp;&nbsp;ai.nvim&nbsp;&nbsp;✧</h1>
 
 <p align="center">
-  <a href="https://github.com/S1M0N38/ai.nvim/actions/workflows/tests.yml">
-    <img alt="Tests workflow" src="https://img.shields.io/github/actions/workflow/status/S1M0N38/ai.nvim/tests.yml?style=for-the-badge&label=Tests"/>
+  <a href="https://github.com/S1M0N38/ai.nvim/actions/workflows/run-tests.yml">
+    <img alt="Tests workflow" src="https://img.shields.io/github/actions/workflow/status/S1M0N38/ai.nvim/run-tests.yml?style=for-the-badge&label=Tests"/>
   </a>
   <a href="https://luarocks.org/modules/S1M0N38/ai.nvim">
     <img alt="LuaRocks release" src="https://img.shields.io/luarocks/v/S1M0N38/ai.nvim?style=for-the-badge&color=5d2fbf"/>
