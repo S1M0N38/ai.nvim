@@ -38,7 +38,7 @@ Read the documentation with [`:help ai.nvim`](https://github.com/S1M0N38/ai.nvim
 
 Plugins built with `ai.nvim`:
 
-- ✎ [dante.nvim](https://github.com/S1M0N38/dante.nvim): A basic writing tool powered by LLM
+- [dante.nvim](https://github.com/S1M0N38/dante.nvim) ✎ A basic writing tool powered by LLM
 - *PR your plugin here ...*
 
 ## ✨ LLM Providers
