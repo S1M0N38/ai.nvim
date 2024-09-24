@@ -2,7 +2,7 @@
   "$schema": "https://raw.githubusercontent.com/sumneko/vscode-lua/master/setting/schema.json",
   "Lua.runtime.version": "LuaJIT",
   "Lua.workspace.library": [
-    "/home/runner/work/ai.nvim/ai.nvim/types",
+    "/home/runner/work/ai.nvim/ai.nvim/lua",
     "/home/runner/work/ai.nvim/ai.nvim/deps/neodev.nvim/types/stable",
     "${3rd}/luassert/library",
     "${3rd}/busted/library"

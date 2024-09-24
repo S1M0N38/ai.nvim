@@ -2,7 +2,7 @@ local M = {}
 
 ---Initialize ai.nvim with global options.
 ---These options will be used by all clients if not overriden in the :new() method.
----@param opts Options: The options to initialize client with
+---@param opts AiOptions: The options to initialize client with
 M.setup = function(opts)
   require("ai.config").setup(opts)
 end
@@ -35,15 +35,13 @@ local function curl_command(url, api_key, request)
   return "curl " .. table.concat(args, " ")
 end
 
----@class Client
----@field base_url string The base URL for all API requests.
----@field api_key string The API key used for authentication.
+---@class AiClient
 local Client = {}
 
 ---Client constructor
 ---@param base_url string?: base url for all API requests
 ---@param api_key string?: enviroment variable used for API authentication.
----@return Client: client object
+---@return AiClient: client object
 function Client:new(base_url, api_key)
   local instance = setmetatable({}, { __index = Client })
   local config = require("ai.config")
