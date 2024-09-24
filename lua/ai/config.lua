@@ -5,14 +5,12 @@ config.defaults = {
   api_key = nil,
 }
 
----@class Options
----@field api_key string: enviroment variable used for API authentication.
----@field base_url? string: base url for all API requests
+---@class AiOptions
 config.options = {}
 
 ---Setup the ai.nvim client options.
 ---It must be called before using other ai.nvim functions.
----@param opts Options: config table
+---@param opts AiOptions: config table
 config.setup = function(opts)
   config.options = vim.tbl_deep_extend("force", {}, config.defaults, opts or {})
 end

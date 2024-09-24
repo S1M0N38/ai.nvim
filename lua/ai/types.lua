@@ -1,5 +1,7 @@
 ---@meta
 
+--- OpenAI types form OpenAPI specification ------------------------------------
+
 ---@class ChatMessage
 ---@field role string The role of the message sender, e.g., "user", "system", or "assistant"
 ---@field content string The content of the message
@@ -52,3 +54,17 @@
 ---@class ChunkDelta
 ---@field role? string The role of the message (optional)
 ---@field content? string The incremental content of the message
+
+
+--- lua/ai/init.lua ------------------------------------------------------------
+
+---@class AiClient
+---@field base_url string The base URL for all API requests.
+---@field api_key string The API key used for authentication.
+
+
+--- lua/ai/config.lua ----------------------------------------------------------
+
+---@class AiOptions
+---@field api_key string: enviroment variable used for API authentication.
+---@field base_url? string: base url for all API requests
