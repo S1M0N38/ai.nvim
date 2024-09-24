@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.3.0](https://github.com/S1M0N38/ai.nvim/compare/v1.2.0...v1.3.0) (2024-09-24)
+
+
+### Features
+
+* update Lua type annotations and paths ([64f7a21](https://github.com/S1M0N38/ai.nvim/commit/64f7a21a962153995deeecdbb38df005b8c6ff11))
+
 ## [1.2.0](https://github.com/S1M0N38/ai.nvim/compare/v1.1.0...v1.2.0) (2024-09-14)
 
 
