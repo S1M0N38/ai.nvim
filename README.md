@@ -58,7 +58,7 @@ The following is an incomplete list of providers that I have experimented with:
 
 - **[OpenAI](https://platform.openai.com/docs/overview)**
   - *base url*: `https://api.openai.com/v1`
-  - *models*: `gpt-4o`, `gpt-4o-mini`
+  - *models*: `gpt-4o`, `gpt-4o-mini`, `o1`, `o1-mini`
   - *note*: access to SOTA models (no free tier)
 
 - **[Groq](https://console.groq.com/docs/quickstart)**
@@ -68,7 +68,7 @@ The following is an incomplete list of providers that I have experimented with:
 
 - **[Mistral](https://docs.mistral.ai/)**
   - *base url*: `https://api.mistral.ai/v1`
-  - *models*: `mistral-large-latest`, `ministral-3b-latest`, `ministral-8b-latest`, `open-mistral-nemo`
+  - *models*: `mistral-large-latest`, `ministral-3b-latest`, `ministral-8b-latest`, `mistral-small-latest`, `open-mistral-nemo`
   - *note*: access to Mistral models (free tier)
 
 If you want to use other providers that do not expose OpenAI-compatible API (e.g., Anthropic, Cohere, ...), you can try [liteLLM](https://docs.litellm.ai/docs/) proxy service.
