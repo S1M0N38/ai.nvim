@@ -72,56 +72,53 @@ function Client:chat_completion_create(
   on_stderr,
   on_exit
 )
+  local cmd = curl_command(self.base_url .. "/chat/completions", self.api_key, request)
+
   if request.stream then
     if not on_chat_completion_chunk then
       error("on_chat_completion_chunk is required for stream=true")
     end
+    local leftover = ""
+    on_stdout = on_stdout
+      or function(_, data, _)
+        for _, raw_str in ipairs(data) do
+          if raw_str and raw_str ~= "" then
+            if leftover ~= "" then
+              raw_str = leftover .. raw_str
+            end
+            local str = raw_str:match("^data: (.+)")
+            if str and str ~= "[DONE]" then
+              local json_str = string.sub(str, string.find(str, "{") or 1)
+              local ok, obj = pcall(function()
+                return vim.json.decode(json_str)
+              end)
+              if ok then
+                leftover = ""
+                on_chat_completion_chunk(obj)
+              else
+                leftover = leftover .. raw_str
+              end
+            end
+          end
+        end
+      end
   else
     if not on_chat_completion then
       error("on_chat_completion is required for stream=false")
     end
-  end
-
-  local obj
-  local status
-  local leftover = nil
-  local cmd = curl_command(self.base_url .. "/chat/completions", self.api_key, request)
-  local job_id = vim.fn.jobstart(cmd, {
-    on_stdout = on_stdout or function(_, data, _)
-      for _, str in ipairs(data) do
-        if str and str ~= "" then
-          if request.stream then
-            if leftover then
-              str = leftover .. str
-              leftover = nil
-            end
-            str = str:match("^data: (.+)$")
-            if str and str ~= "[DONE]" then
-              status, obj = pcall(function()
-                return vim.json.decode(str)
-              end)
-              if not status then
-                leftover = "data: " .. str
-              else
-                --patches for GitHub Copilot wierd behavior
-                assert(obj, "Error while parsing the response: obj is nil")
-                if #obj.choices > 0 then
-                  if obj["choices"][1]["delta"]["content"] == vim.NIL then
-                    obj["choices"][1]["delta"]["content"] = ""
-                  end
-                  ---@diagnostic disable-next-line: need-check-nil
-                  on_chat_completion_chunk(obj)
-                end
-              end
-            end
-          else
-            obj = vim.json.decode(str)
-            ---@diagnostic disable-next-line: need-check-nil
-            on_chat_completion(obj)
-          end
+    on_stdout = on_stdout
+      or function(_, data, _)
+        local raw_str = table.concat(data)
+        if raw_str and raw_str ~= "" then
+          local json_str = string.sub(raw_str, string.find(raw_str, "{") or 1)
+          local obj = vim.json.decode(json_str)
+          on_chat_completion(obj)
         end
       end
-    end,
+  end
+
+  local job_id = vim.fn.jobstart(cmd, {
+    on_stdout = on_stdout,
     on_stderr = on_stderr or function(_, data, _)
       for _, str in pairs(data) do
         if str ~= "" then
