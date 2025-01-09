@@ -34,7 +34,7 @@ To the best of my knowledge, if you want to build a plugin for Neovim that uses 
 
 ## 🚀 Usage
 
-Read the documentation with [`:help ai.nvim`](https://github.com/S1M0N38/ai.nvim/blob/main/doc/ai.txt)
+Read the documentation with [`:help ai-nvim`](https://github.com/S1M0N38/ai.nvim/blob/main/doc/ai.txt)
 
 Plugins built with `ai.nvim`:
 
@@ -46,22 +46,38 @@ Plugins built with `ai.nvim`:
 There are many providers that offer LLM models exposing OpenAI-compatible API.
 The following is an incomplete list of providers that I have experimented with:
 
-| Provider                                                                                                                | Models                                                            | Base URL                         |
-| :---------------------------------------------------------------------------------------------------------------------- | :---------------------------------------------------------------- | :------------------------------- |
-| [OpenAI](https://platform.openai.com/docs/overview)                                                                     | `gpt-4o`, `gpt-4o-mini`                                           | `https://api.openai.com/v1`      |
-| [Mistral](https://docs.mistral.ai/)                                                                                     | `mistral-large-latest`, `open-mistral-nemo`                       | `https://api.mistral.ai/v1`      |
-| [Groq](https://console.groq.com/docs/quickstart)                                                                        | `gemma2-9b-it`, `llama-3.1-70b-versatile`, `llama-3.1-8b-instant` | `https://api.groq.com/openai/v1` |
-| [Copilot Chat](https://docs.github.com/en/copilot/using-github-copilot/asking-github-copilot-questions-in-your-ide)[^1] | `gpt-3.5-turbo`, `gpt-4o-mini`, `gpt-4o`, `gpt-4-0125-preview`    | `https://api.githubcopilot.com`  |
+- **Local models ([LM Studio](https://lmstudio.ai/), [Ollama](https://ollama.com/), [llama-cpp](https://github.com/ggerganov/llama.cpp), [vLLM](https://docs.vllm.ai/en/latest/), ...)**
+  - *base url*: `http://localhost:[PORT]`
+  - *models*: every model supported by the local provider
+  - *note*: free and private.
 
-- If you want to use other providers that do not expose OpenAI-compatible API (e.g., Anthropic, Cohere, ...), you can try [liteLLM](https://docs.litellm.ai/docs/) proxy service.
-- If you want to use local models, you can use [Ollama](https://ollama.com/), [llama-cpp](https://github.com/ggerganov/llama.cpp), [vLLM](https://docs.vllm.ai/en/latest/) or others.
+- **[Copilot](https://docs.github.com/en/copilot/using-github-copilot/asking-github-copilot-questions-in-your-ide)**
+  - *base url*: `https://api.githubcopilot.com`
+  - *models*: `gpt-4o-2024-08-06`, `claude-3.5-sonnet`, `o1-2024-12-17`, `o1-mini-2024-09-12`
+  - *note*: access to SOTA model with GitHub Copilot subscription (free for students)
+
+- **[OpenAI](https://platform.openai.com/docs/overview)**
+  - *base url*: `https://api.openai.com/v1`
+  - *models*: `gpt-4o`, `gpt-4o-mini`
+  - *note*: access to SOTA models (no free tier)
+
+- **[Groq](https://console.groq.com/docs/quickstart)**
+  - *base url*: `https://api.groq.com/openai/v1`
+  - *models*: `gemma2-9b-it`, `llama-3.3-70b-versatile`, `llama-3.1-8b-instant`, `mixtral-8x7b-32768`
+  - *note*: crazy fast inference for open source models (free tier)
+
+- **[Mistral](https://docs.mistral.ai/)**
+  - *base url*: `https://api.mistral.ai/v1`
+  - *models*: `mistral-large-latest`, `ministral-3b-latest`, `ministral-8b-latest`, `open-mistral-nemo`
+  - *note*: access to Mistral models (free tier)
+
+If you want to use other providers that do not expose OpenAI-compatible API (e.g., Anthropic, Cohere, ...), you can try [liteLLM](https://docs.litellm.ai/docs/) proxy service.
 
 **There is no future plan to support other API standards besides OpenAI-compatible API.**
 
 ## 🙏 Acknowledgments
 
-- My Awesome Plugin [template](https://github.com/S1M0N38/my-awesome-plugin.nvim).
+- base.nvim [template](https://github.com/S1M0N38/base.nvim).
 - [mrcjkb's blog posts](https://mrcjkb.dev/) about Neovim, Luarocks, and Busted.
 - [mrcjkb](https://github.com/mrcjkb) and [vhyrro](https://github.com/vhyrro) repos' for GitHub Actions workflows.
-
-[^1]: Copilot Chat is not a proper LLM provider, but a service offered with a Copilot subscription. If you use [copilot.vim](https://github.com/github/copilot.vim) or [copilot.lua](https://github.com/zbirenbaum/copilot.lua), you should have the token stored in one of these locations: `~/AppData/Local/github-copilot`, `$XDG_CONFIG_HOME/github-copilot`, or `~/.config/github-copilot` in a file named `hosts.json` or `apps.json`. That token is used for requesting another token with an expiration time. You can use that second token as `api_key` in ai.nvim configuration. No plan to implement an auto-token refresh mechanism.
+- [codecompanion.nvim](https://github.com/olimorris/codecompanion.nvim) for Copilot token validation logic.
