@@ -1,5 +1,18 @@
 # Changelog
 
+## [1.4.0](https://github.com/S1M0N38/ai.nvim/compare/v1.3.0...v1.4.0) (2025-01-09)
+
+
+### Features
+
+* add copilot as provider ([85ae05b](https://github.com/S1M0N38/ai.nvim/commit/85ae05b6cf7ef099458b2f75025b4156e3332865))
+
+
+### Bug Fixes
+
+* add type annotations for copilot functions ([adc1e6b](https://github.com/S1M0N38/ai.nvim/commit/adc1e6be91973ba58248b6337d22624996511c8b))
+* check that copilot userdata var is a table ([a481d0c](https://github.com/S1M0N38/ai.nvim/commit/a481d0c71837ec90abfaa5a820e388cc8b62dc23))
+
 ## [1.3.0](https://github.com/S1M0N38/ai.nvim/compare/v1.2.0...v1.3.0) (2024-09-24)
 
 
