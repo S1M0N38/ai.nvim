@@ -46,7 +46,11 @@ function Client:new(base_url, api_key)
   local instance = setmetatable({}, { __index = Client })
   local config = require("ai.config")
   instance.base_url = base_url or config.options.base_url or config.defaults.base_url
-  instance.api_key = api_key or config.options.api_key
+  if config.options.copilot then
+    instance.api_key = require("ai.copilot").setup().token
+  else
+    instance.api_key = api_key or config.options.api_key
+  end
   if not instance.api_key then
     error("API key is required.")
   end

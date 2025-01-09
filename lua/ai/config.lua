@@ -3,6 +3,7 @@ local config = {}
 config.defaults = {
   base_url = "https://api.openai.com/v1",
   api_key = nil,
+  copilot = false,
 }
 
 ---@class AiOptions
