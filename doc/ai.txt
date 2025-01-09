@@ -1,5 +1,5 @@
 ==============================================================================
-INTRODUCTION                                                              *ai*
+INTRODUCTION                                                         *ai-nvim*
 
 ai.nvim is a Neovim library (not a Neovim plugin) that makes it easy to query
 LLM providers. It can be thought of as a high-level client for OpenAI
@@ -28,7 +28,13 @@ As lazy.nvim dependency ~
       dependencies = {
         {
           "S1M0N38/ai.nvim",
-          opts = { },
+          opts = {
+            -- Setup provider. See ai-setup section for more information.
+          },
+          dependencies = {
+            -- Required to use copilot as provider (:Copilot auth)
+            { "zbirenbaum/copilot.lua", opts = { } }
+          }
         }
         -- other dependencies required by dante.nvim ...
       }
@@ -69,6 +75,7 @@ ai.setup({opts}) ~
   {
     base_url = "https://api.openai.com/v1",
     api_key = nil,
+    copilot = false,
   }
 <
 
@@ -83,6 +90,10 @@ ai.setup({opts}) ~
     API key is not provided, the library will throw an error.
     A suggestion is to use the environment variable to store the API key and
     then read it with `vim.fn.getenv()` (|getenv()|).
+
+  - `copilot`: If `true`, ai.nvim will look for a token created by
+    `copilot.lua`, validate if it is expired, and use the resulting token as
+    `api_key`.
 
 
 ==============================================================================
@@ -168,7 +179,7 @@ Client:new(base_url, api_key) ~
   and `api_key` parameters are optional. If not provided, the library will use
   the default values set by `ai.setup()`.
 
-  - `base_url`: The base URL used by in all the client requests. See
+  - `base_url`: The base URL used by all the client requests. See
     |ai-setup| for more information.
 
   - `api_key`: The API key used to authenticate all the client requests. See
@@ -207,7 +218,7 @@ Client:chat_completion_create( ~
     implementation.
 
   - `on_stderr`: This function is called on stderr output. The default
-    behavior is to |notify| with a error message.
+    behavior is to |notify| with an error message.
 
   - `on_exit`: This function is called when the stdout/stderr was already
     caught and the curl process exits.
