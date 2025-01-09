@@ -14,6 +14,7 @@ local _oauth_token
 local _github_token
 
 --- Finds the configuration path
+---@return string|nil
 local function find_config_path()
   local path = vim.fs.normalize("$XDG_CONFIG_HOME")
 
@@ -111,6 +112,8 @@ local function authorize_token()
   return _github_token
 end
 
+--- Get github_token (api_key) for the copilot provider
+---@return boolean|table: true if the setup was successful, false otherwise
 M.setup = function()
   _oauth_token = get_github_token()
   if not _oauth_token then
