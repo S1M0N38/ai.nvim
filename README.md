@@ -46,7 +46,7 @@ Plugins built with `ai.nvim`:
 There are many providers that offer LLM models exposing OpenAI-compatible API.
 The following is an incomplete list of providers that I have experimented with:
 
-- **Local models ([LM Studio](https://lmstudio.ai/), [Ollama](https://ollama.com/), [llama-cpp](https://github.com/ggerganov/llama.cpp), [vLLM](https://docs.vllm.ai/en/latest/), ...)**
+- **Local models** ([LM Studio](https://lmstudio.ai/), [Ollama](https://ollama.com/), [llama-cpp](https://github.com/ggerganov/llama.cpp), [vLLM](https://docs.vllm.ai/en/latest/), ...)
   - *base url*: `http://localhost:[PORT]`
   - *models*: every model supported by the local provider
   - *note*: free and private.
