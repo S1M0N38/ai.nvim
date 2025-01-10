@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.4.1](https://github.com/S1M0N38/ai.nvim/compare/v1.4.0...v1.4.1) (2025-01-10)
+
+
+### Bug Fixes
+
+* update stream/not-stream json decoding ([f82a0e6](https://github.com/S1M0N38/ai.nvim/commit/f82a0e637e4882cb78d7c0396ab7177776b7a55c))
+
 ## [1.4.0](https://github.com/S1M0N38/ai.nvim/compare/v1.3.0...v1.4.0) (2025-01-09)
 
 
