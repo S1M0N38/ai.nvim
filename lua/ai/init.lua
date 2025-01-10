@@ -78,25 +78,31 @@ function Client:chat_completion_create(
     if not on_chat_completion_chunk then
       error("on_chat_completion_chunk is required for stream=true")
     end
-    local leftover = ""
+    local buffer = ""
     on_stdout = on_stdout
       or function(_, data, _)
         for _, raw_str in ipairs(data) do
           if raw_str and raw_str ~= "" then
-            if leftover ~= "" then
-              raw_str = leftover .. raw_str
-            end
-            local str = raw_str:match("^data: (.+)")
+            -- if buffer ~= "" then
+            --   print("buffer is not empty: " .. buffer .. raw_str)
+            -- end
+            buffer = buffer .. raw_str
+            local str = buffer:match("^data: (.+)")
             if str and str ~= "[DONE]" then
-              local json_str = string.sub(str, string.find(str, "{") or 1)
-              local ok, obj = pcall(function()
-                return vim.json.decode(json_str)
-              end)
+              local ok, obj = pcall(vim.json.decode, str, { luanil = { object = true, array = true } })
               if ok then
-                leftover = ""
-                on_chat_completion_chunk(obj)
-              else
-                leftover = leftover .. raw_str
+                buffer = ""
+                if obj then
+                  if obj.choices and #obj.choices > 0 then
+                    on_chat_completion_chunk(obj)
+                    -- else
+                    -- print("obj.choices is empty: " .. str)
+                  end
+                  -- else
+                  -- print("obj is nil: " .. str)
+                end
+                -- else
+                -- print("partial str: " .. str)
               end
             end
           end
@@ -110,9 +116,21 @@ function Client:chat_completion_create(
       or function(_, data, _)
         local raw_str = table.concat(data)
         if raw_str and raw_str ~= "" then
-          local json_str = string.sub(raw_str, string.find(raw_str, "{") or 1)
-          local obj = vim.json.decode(json_str)
-          on_chat_completion(obj)
+          local str = string.sub(raw_str, string.find(raw_str, "{") or 1)
+          local ok, obj = pcall(vim.json.decode, str, { luanil = { object = true, array = true } })
+          if ok then
+            if obj then
+              if obj.choices and #obj.choices > 0 then
+                on_chat_completion(obj)
+                -- else
+                -- print("obj.choices is empty: " .. str)
+              end
+              -- else
+              -- print("obj is nil: " .. str)
+            end
+          else
+            vim.notify("Error: " .. str, vim.log.levels.ERROR)
+          end
         end
       end
   end
