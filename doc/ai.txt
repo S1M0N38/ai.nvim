@@ -163,7 +163,7 @@ Finally, you can make the request.
     client:chat_completion_create(
       request,
       on_chat_completion,
-      on_chat_completion_chunk,
+      on_chat_completion_chunk
     )
 <
 
