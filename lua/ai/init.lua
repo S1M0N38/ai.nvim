@@ -112,24 +112,32 @@ function Client:chat_completion_create(
     if not on_chat_completion then
       error("on_chat_completion is required for stream=false")
     end
+    local buffer = ""
     on_stdout = on_stdout
       or function(_, data, _)
         local raw_str = table.concat(data)
         if raw_str and raw_str ~= "" then
-          local str = string.sub(raw_str, string.find(raw_str, "{") or 1)
-          local ok, obj = pcall(vim.json.decode, str, { luanil = { object = true, array = true } })
-          if ok then
-            if obj then
-              if obj.choices and #obj.choices > 0 then
-                on_chat_completion(obj)
+          -- if buffer ~= "" then
+          --   print("buffer is not empty: " .. buffer .. raw_str)
+          -- end
+          buffer = buffer .. raw_str
+          local str = buffer
+          if str and str ~= "" then
+            local ok, obj = pcall(vim.json.decode, str, { luanil = { object = true, array = true } })
+            if ok then
+              buffer = ""
+              if obj then
+                if obj.choices and #obj.choices > 0 then
+                  on_chat_completion(obj)
+                  -- else
+                  -- print("obj.choices is empty: " .. str)
+                end
                 -- else
-                -- print("obj.choices is empty: " .. str)
+                -- print("obj is nil: " .. str)
               end
               -- else
-              -- print("obj is nil: " .. str)
+              -- print("partial str: " .. str)
             end
-          else
-            vim.notify("Error: " .. str, vim.log.levels.ERROR)
           end
         end
       end
