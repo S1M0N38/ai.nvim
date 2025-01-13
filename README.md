@@ -1,18 +1,20 @@
-<h1 align="center">✧&nbsp;&nbsp;ai.nvim&nbsp;&nbsp;✧</h1>
+<div align="center">
+  <h1>✧&nbsp;&nbsp;ai.nvim&nbsp;&nbsp;✧</h1>
+  <p align="center">
+    <a href="https://github.com/S1M0N38/ai.nvim/actions/workflows/run-tests.yml">
+      <img alt="Tests workflow" src="https://img.shields.io/github/actions/workflow/status/S1M0N38/ai.nvim/run-tests.yml?style=for-the-badge&label=Tests"/>
+    </a>
+    <a href="https://luarocks.org/modules/S1M0N38/ai.nvim">
+      <img alt="LuaRocks release" src="https://img.shields.io/luarocks/v/S1M0N38/ai.nvim?style=for-the-badge&color=5d2fbf"/>
+    </a>
+    <a href="https://github.com/S1M0N38/ai.nvim/releases">
+      <img alt="GitHub release" src="https://img.shields.io/github/v/release/S1M0N38/ai.nvim?style=for-the-badge&label=GitHub"/>
+    </a>
+  </p>
+  <p><em>Query LLMs following OpenAI API specification</em></p>
+  <hr>
+</div>
 
-<p align="center">
-  <a href="https://github.com/S1M0N38/ai.nvim/actions/workflows/run-tests.yml">
-    <img alt="Tests workflow" src="https://img.shields.io/github/actions/workflow/status/S1M0N38/ai.nvim/run-tests.yml?style=for-the-badge&label=Tests"/>
-  </a>
-  <a href="https://luarocks.org/modules/S1M0N38/ai.nvim">
-    <img alt="LuaRocks release" src="https://img.shields.io/luarocks/v/S1M0N38/ai.nvim?style=for-the-badge&color=5d2fbf"/>
-  </a>
-  <a href="https://github.com/S1M0N38/ai.nvim/releases">
-    <img alt="GitHub release" src="https://img.shields.io/github/v/release/S1M0N38/ai.nvim?style=for-the-badge&label=GitHub"/>
-  </a>
-</p>
-
-______________________________________________________________________
 
 ## 💡 Idea
 
