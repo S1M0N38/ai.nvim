@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.4.2](https://github.com/S1M0N38/ai.nvim/compare/v1.4.1...v1.4.2) (2025-01-11)
+
+
+### Bug Fixes
+
+* save stdout to tmp buffer of no-stream requests ([41ca505](https://github.com/S1M0N38/ai.nvim/commit/41ca50535827cdfe57ef5651b309ac0859a77122))
+
 ## [1.4.1](https://github.com/S1M0N38/ai.nvim/compare/v1.4.0...v1.4.1) (2025-01-10)
 
 
