@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.5.0](https://github.com/S1M0N38/ai.nvim/compare/v1.4.2...v1.5.0) (2025-01-13)
+
+
+### Features
+
+* add codestral to llm providers ([ad7dabc](https://github.com/S1M0N38/ai.nvim/commit/ad7dabc72636c1eb81b4fa83ad1784775c73c4de))
+
 ## [1.4.2](https://github.com/S1M0N38/ai.nvim/compare/v1.4.1...v1.4.2) (2025-01-11)
 
 
