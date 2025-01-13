@@ -22,6 +22,13 @@ local providers = {
     },
     data = require("spec.data.lmstudio"),
   },
+  codestral = {
+    opts = {
+      base_url = "https://codestral.mistral.ai/v1",
+      api_key = vim.fn.getenv("CODESTRAL_API_KEY"),
+    },
+    data = require("spec.data.codestral"),
+  },
 }
 
 describe("[#config] Create ai.Client", function()

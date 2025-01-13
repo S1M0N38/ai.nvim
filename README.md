@@ -71,6 +71,11 @@ The following is an incomplete list of providers that I have experimented with:
   - *models*: `mistral-large-latest`, `ministral-3b-latest`, `ministral-8b-latest`, `mistral-small-latest`, `open-mistral-nemo`
   - *note*: access to Mistral models (free tier)
 
+- **[Codestral](https://docs.mistral.ai/capabilities/code_generation/#codestral)** (Mistral)
+  - *base url*: `https://codestral.mistral.ai/v1`
+  - *models*: `codestral-latest`
+  - *note*: access to Mistral code models (free for now)
+
 If you want to use other providers that do not expose OpenAI-compatible API (e.g., Anthropic, Cohere, ...), you can try [liteLLM](https://docs.litellm.ai/docs/) proxy service.
 
 **There is no future plan to support other API standards besides OpenAI-compatible API.**
