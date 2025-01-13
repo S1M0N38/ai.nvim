@@ -10,9 +10,6 @@
   <a href="https://github.com/S1M0N38/ai.nvim/releases">
     <img alt="GitHub release" src="https://img.shields.io/github/v/release/S1M0N38/ai.nvim?style=for-the-badge&label=GitHub"/>
   </a>
-  <a href="https://www.reddit.com/r/neovim/comments/...">
-    <img alt="Reddit post" src="https://img.shields.io/badge/post-reddit?style=for-the-badge&label=Reddit&color=FF5700"/>
-  </a>
 </p>
 
 ______________________________________________________________________
@@ -38,7 +35,8 @@ Read the documentation with [`:help ai-nvim`](https://github.com/S1M0N38/ai.nvim
 
 Plugins built with `ai.nvim`:
 
-- [dante.nvim](https://github.com/S1M0N38/dante.nvim) ✎ A basic writing tool powered by LLM
+- [`S1M0N38/dante.nvim`](https://github.com/S1M0N38/dante.nvim) ✎ A basic writing tool powered by LLM
+- [`S1M0N38/chatml.nvim`](https://github.com/S1M0N38/chatml.nvim) ⇋ Convert markdown to LLM JSON requests
 - *PR your plugin here ...*
 
 ## ✨ LLM Providers
