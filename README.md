@@ -53,7 +53,7 @@ The following is an incomplete list of providers that I have experimented with:
 
 - **[Copilot](https://docs.github.com/en/copilot/using-github-copilot/asking-github-copilot-questions-in-your-ide)**
   - *base url*: `https://api.githubcopilot.com`
-  - *models*: `gpt-4o-2024-08-06`, `claude-3.5-sonnet`, `o1-2024-12-17`, `o1-mini-2024-09-12`
+  - *models*: `gpt-4o-mini`, `gpt-4o`, `o1`, `o3-mini`, `gemini-2.0-flash-001`, `claude-3.5-sonnet`
   - *note*: access to SOTA models with GitHub Copilot subscription (free for students)
 
 - **[OpenAI](https://platform.openai.com/docs/overview)**
@@ -63,12 +63,12 @@ The following is an incomplete list of providers that I have experimented with:
 
 - **[Groq](https://console.groq.com/docs/quickstart)**
   - *base url*: `https://api.groq.com/openai/v1`
-  - *models*: `gemma2-9b-it`, `llama-3.3-70b-versatile`, `llama-3.1-8b-instant`, `mixtral-8x7b-32768`
+  - *models*: `gemma2-9b-it`, `llama-3.3-70b-versatile`, `llama-3.1-8b-instant`, `mixtral-8x7b-32768`, `qwen-2.5-coder-32b`, `qwen-2.5-32b`, `deepseek-r1-distill-qwen-32b`, `deepseek-r1-distill-llama-70b-specdec`, `deepseek-r1-distill-llama-70b`, `llama-3.3-70b-specdec`
   - *note*: crazy fast inference for open source models (free tier)
 
 - **[Mistral](https://docs.mistral.ai/)**
   - *base url*: `https://api.mistral.ai/v1`
-  - *models*: `mistral-large-latest`, `ministral-3b-latest`, `ministral-8b-latest`, `mistral-small-latest`, `open-mistral-nemo`
+  - *models*: `mistral-large-latest`, `ministral-3b-latest`, `ministral-8b-latest`, `mistral-small-latest`, `open-mistral-nemo`, `mistral-saba-latest`, `codestral-latest`
   - *note*: access to Mistral models (free tier)
 
 - **[Codestral](https://docs.mistral.ai/capabilities/code_generation/#codestral)** (Mistral)
