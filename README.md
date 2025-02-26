@@ -53,7 +53,7 @@ The following is an incomplete list of providers that I have experimented with:
 
 - **[Copilot](https://docs.github.com/en/copilot/using-github-copilot/asking-github-copilot-questions-in-your-ide)**
   - *base url*: `https://api.githubcopilot.com`
-  - *models*: `gpt-4o-mini`, `gpt-4o`, `o1`, `o3-mini`, `gemini-2.0-flash-001`, `claude-3.5-sonnet`
+  - *models*: `gpt-4o-mini`, `gpt-4o`, `o1`, `o3-mini`, `gemini-2.0-flash-001`, `claude-3.5-sonnet`, `claude-3.7-sonnet`, `claude-3.7-sonnet-thought`
   - *note*: access to SOTA models with GitHub Copilot subscription (free for students)
 
 - **[OpenAI](https://platform.openai.com/docs/overview)**
