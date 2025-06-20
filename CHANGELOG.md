@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.6.0](https://github.com/S1M0N38/ai.nvim/compare/v1.5.0...v1.6.0) (2025-06-20)
+
+
+### Features
+
+* use temp file for request body ([d8f0828](https://github.com/S1M0N38/ai.nvim/commit/d8f0828e5a739454fe0e07776b9ce81d8b699e59))
+
 ## [1.5.0](https://github.com/S1M0N38/ai.nvim/compare/v1.4.2...v1.5.0) (2025-01-13)
 
 
