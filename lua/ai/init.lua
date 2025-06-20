@@ -16,13 +16,21 @@ local function curl_command(url, api_key, request)
   if type(json_request) ~= "string" then
     error("Error while parsing the request")
   end
+
+  -- create temporary file for JSON data
+  local tmpfile = vim.fn.tempname()
+  local ok = vim.fn.writefile({ json_request }, tmpfile)
+  if ok ~= 0 then
+    error("Failed to write request to temp file")
+  end
+
   local args = {
     "--silent",
     "--no-buffer",
     "--header " .. vim.fn.shellescape("Authorization: Bearer " .. api_key),
     "--header " .. vim.fn.shellescape("Content-Type: application/json"),
     "--url " .. vim.fn.shellescape(url),
-    "--data " .. vim.fn.shellescape(json_request),
+    "--data-binary " .. vim.fn.shellescape("@" .. tmpfile),
   }
 
   -- hack for GitHub Copilot compatibility
