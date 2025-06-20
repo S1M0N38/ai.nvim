@@ -20,6 +20,6 @@ jobs:
       - name: Run tests
         uses: nvim-neorocks/nvim-busted-action@v1
         env:
-          GROQ_API_KEY_AI_NVIM: ${{ secrets.GROQ_API_KEY_AI_NVIM }}
+          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY_AI_NVIM }}
         with:
           nvim_version: ${{ matrix.neovim_version }}

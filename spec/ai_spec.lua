@@ -4,7 +4,7 @@ local providers = {
   groq = {
     opts = {
       base_url = "https://api.groq.com/openai/v1",
-      api_key = vim.fn.getenv("GROQ_API_KEY_AI_NVIM"),
+      api_key = vim.fn.getenv("GROQ_API_KEY"),
     },
     data = require("spec.data.groq"),
   },
